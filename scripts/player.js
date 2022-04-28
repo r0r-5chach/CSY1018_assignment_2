@@ -1,0 +1,1 @@
+/*Logic for player lives and firing ability */
