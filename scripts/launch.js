@@ -19,5 +19,6 @@ function load() {
 function startGame() {
     showDisplay("block");
     document.getElementById("start").style.display = "none";
+    document.getElementsByClassName("weapon")[0].style.display = "none";
 }
 document.addEventListener("DOMContentLoaded", load);
