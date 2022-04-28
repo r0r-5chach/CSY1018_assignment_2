@@ -1,14 +1,23 @@
 /*Add events to webpage*/
 
-function loadScripts() {
+function showDisplay(mode) {
+    for (let element of document.body.getElementsByTagName("*")) {
+        element.style.display = mode;
+    }
+}
+
+function load() {
     document.addEventListener("keydown", getKey)
     document.addEventListener("keyup", stop)
     setInterval(move, 10);
     document.getElementById("start").addEventListener("click", startGame)
+
+    showDisplay("none");
+    document.getElementById("start").style.display = "block";
 }
 
 function startGame() {
-    var button = document.getElementById("start");
-    button.style.display = "none";
+    showDisplay("block");
+    document.getElementById("start").style.display = "none";
 }
-document.addEventListener("DOMContentLoaded", loadScripts);
+document.addEventListener("DOMContentLoaded", load);
