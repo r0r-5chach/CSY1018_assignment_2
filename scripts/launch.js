@@ -1,8 +1,9 @@
 /*Add events to webpage*/
 
 function loadScripts() {
-    document.addEventListener("keydown", move)
+    document.addEventListener("keydown", getKey)
     document.addEventListener("keyup", stop)
+    setInterval(move, 10);
     document.getElementById("start").addEventListener("click", startGame)
 }
 
