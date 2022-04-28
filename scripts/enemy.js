@@ -12,6 +12,7 @@ function spawnEnemy() {
         if (document.elementFromPoint(alien.offsetLeft, alien.offsetTop).classList.contains("alien") == false) {   
             document.body.appendChild(alien);
             aliens.push(alien);
+            console.log("Alien Spawned")
             break;
         }
    }
@@ -28,6 +29,7 @@ function spawnBomb() {
     alien.appendChild(bomb);
     bombLogic = setInterval(fall, 100);
     bombs.push([bomb, bombLogic]);
+    console.log("Bomb Spawned")
 }
 
 function fall() {
@@ -39,6 +41,10 @@ function fall() {
             if(Math.floor(Math.random() * 4) == 3) {
                 clearInterval(element[1]);
                 element[0].className = "explosion";
+                console.log("Explosion" + bombs.length)
+                setTimeout(() => {element[0].remove()}, 3000);
+                bombs.splice(bombs.indexOf(element),1);
+                console.log("Bomb Despawned" + bombs.length);
             }
         }
     }
