@@ -40,7 +40,7 @@ function fall() {
         element.style.top = (element.offsetTop + 10) + "px";
         var closestElement = document.elementFromPoint(element.offsetLeft, element.offsetTop+10);
         if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
-            if(Math.floor(Math.random() * 100) < 10 || element.bottom >= document.body.bottom) {
+            if(Math.floor(Math.random() * 100) < 10 || element.bottom >= document.body.bottom || closestElement.classList.contains("character")) {
                 element.className = "explosion";
                 console.log("Explosion")
                 setTimeout(() => {element.remove()}, 3000);
