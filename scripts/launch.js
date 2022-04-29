@@ -20,5 +20,7 @@ function startGame() {
     showDisplay("block");
     document.getElementById("start").style.display = "none";
     document.getElementsByClassName("weapon")[0].style.display = "none";
+    setInterval(spawnEnemy, 2500);
+    setInterval(checkExplosion, 10);
 }
 document.addEventListener("DOMContentLoaded", load);

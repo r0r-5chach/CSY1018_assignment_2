@@ -11,7 +11,8 @@ function spawnEnemy() {
         alien.style.left = Math.floor(Math.random() * document.body.offsetWidth) + "px";
         if (document.elementFromPoint(alien.offsetLeft, alien.offsetTop).classList.contains("alien") == false) {   
             document.body.appendChild(alien);
-            aliens.push(alien);
+            alienLogic = setInterval(spawnBomb, 3000);
+            aliens.push([alien, alienLogic]);
             console.log("Alien Spawned")
             break;
         }
@@ -26,7 +27,7 @@ function spawnBomb() {
     bomb.style.top = "70px";
     bomb.style.zIndex = "1";
     bomb.style.display = "absolute";
-    alien.appendChild(bomb);
+    alien[0].appendChild(bomb);
     bombLogic = setInterval(fall, 100);
     bombs.push([bomb, bombLogic]);
     console.log("Bomb Spawned")
@@ -37,15 +38,26 @@ function fall() {
     bomb[0].style.top = (bomb[0].offsetTop + 10) + "px";
 
     for (let element of bombs) {
-        if (document.elementFromPoint(element[0].offsetLeft, element[0].offsetTop).classList.contains("sky") != true) {
-            if(Math.floor(Math.random() * 4) == 3) {
+        var closestElement = document.elementFromPoint(element[0].offsetLeft, element[0].offsetTop+10);
+        if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
+            if(Math.floor(Math.random() * 2) == 1) {
                 clearInterval(element[1]);
                 element[0].className = "explosion";
-                console.log("Explosion" + bombs.length)
+                console.log("Explosion")
                 setTimeout(() => {element[0].remove()}, 3000);
                 bombs.splice(bombs.indexOf(element),1);
-                console.log("Bomb Despawned" + bombs.length);
+                console.log("Bomb Despawned");
             }
+        } 
+    }
+}
+
+function checkExplosion() {
+    for (let element of document.getElementsByClassName("explosion")) {
+        var elemRect = element.getBoundingClientRect();
+        var playerRect = document.getElementById("player").getBoundingClientRect();
+        if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left) {
+            document.getElementById("player").style.display = "none";
         }
     }
 }
