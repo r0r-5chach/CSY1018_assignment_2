@@ -1,4 +1,4 @@
-class GameManager {
+export class GameManager {
     constructor() {
         this.intervals = [];
         this.aliens = [];
