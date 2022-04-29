@@ -6,6 +6,7 @@ function showDisplay(mode) {
     }
 }
 
+/*Registers interval functions and trigger functions*/
 function load() {
     document.addEventListener("keydown", getKey)
     document.addEventListener("keyup", stop)
@@ -16,6 +17,7 @@ function load() {
     document.getElementById("start").style.display = "block";
 }
 
+/*Starts game functionality*/
 function startGame() {
     showDisplay("block");
     document.getElementById("start").style.display = "none";
@@ -23,4 +25,5 @@ function startGame() {
     setInterval(spawnEnemy, 2500);
     setInterval(checkExplosion, 10);
 }
+
 document.addEventListener("DOMContentLoaded", load);

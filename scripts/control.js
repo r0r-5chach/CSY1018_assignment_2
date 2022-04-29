@@ -8,6 +8,7 @@ function setVars() {
 
 document.onloadend = setVars;
 
+/*Controls vertical movement*/
 function verticalMovement(keyCode) {
     var playerLeft = player.offsetLeft;
     var playerTop = player.offsetTop;
@@ -33,6 +34,7 @@ function verticalMovement(keyCode) {
     }
 }
 
+/*Controls horizontal movement*/
 function horizontalMovement(keyCode) {
     var playerLeft = player.offsetLeft;
     var playerTop = player.offsetTop;
@@ -58,6 +60,7 @@ function horizontalMovement(keyCode) {
     }
 }
 
+/*Controls movement interval*/
 function move() {
     if (currentKey == 0) {
         verticalMovement(lastKey);
@@ -73,11 +76,13 @@ function move() {
     
 }
 
+/*Gets triggered keystroke*/
 function getKey(event) {
     lastKey = currentKey;
     currentKey = event.keyCode;
 }
 
+/*Identifies if no keys are pressed*/
 function stop(event) {
     if (currentKey == lastKey) {
         currentKey = 0;

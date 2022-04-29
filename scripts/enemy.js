@@ -2,6 +2,7 @@
 var aliens = [];
 var bombs = [];
 
+/*Spawns Enemies*/
 function spawnEnemy() {
    var alien = document.createElement("div");
    alien.className = "alien";
@@ -19,6 +20,7 @@ function spawnEnemy() {
    }
 }
 
+/*Spawns a bomb*/
 function spawnBomb() {
     var alien = aliens[Math.floor(Math.random() * aliens.length)];
     var bomb = document.createElement("div");
@@ -33,6 +35,7 @@ function spawnBomb() {
     console.log("Bomb Spawned")
 }
 
+/*Makes a random bomb fall a set amount and explodes if colliding with the floor*/
 function fall() {
     var bomb = bombs[Math.floor(Math.random() * bombs.length)];
     bomb[0].style.top = (bomb[0].offsetTop + 10) + "px";
@@ -52,6 +55,7 @@ function fall() {
     }
 }
 
+/*Checks to see if player is colliding with exploded bomb*/
 function checkExplosion() {
     for (let element of document.getElementsByClassName("explosion")) {
         var elemRect = element.getBoundingClientRect();
