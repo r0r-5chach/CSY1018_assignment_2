@@ -24,7 +24,8 @@ function startGame() {
     document.getElementById("start").style.display = "none";
     document.getElementsByClassName("weapon")[0].style.display = "none";
     intervals.push(setInterval(spawnEnemy, 2500));
-    intervals.push(setInterval(checkExplosion, 10));
+    setTimeout(intervals.push(setInterval(fall, 50)), 2500);
+    intervals.push(setInterval(checkExplosion, 1));
 }
 
 function endGame() {

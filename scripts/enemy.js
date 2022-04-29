@@ -30,28 +30,24 @@ function spawnBomb() {
     bomb.style.zIndex = "1";
     bomb.style.display = "absolute";
     alien[0].appendChild(bomb);
-    bombLogic = setInterval(fall, 100);
-    bombs.push([bomb, bombLogic]);
+    bombs.push(bomb);
     console.log("Bomb Spawned")
 }
 
 /*Makes a random bomb fall a set amount and explodes if colliding with the floor*/
 function fall() {
-    var bomb = bombs[Math.floor(Math.random() * bombs.length)];
-    bomb[0].style.top = (bomb[0].offsetTop + 10) + "px";
-
     for (let element of bombs) {
-        var closestElement = document.elementFromPoint(element[0].offsetLeft, element[0].offsetTop+10);
+        element.style.top = (element.offsetTop + 10) + "px";
+        var closestElement = document.elementFromPoint(element.offsetLeft, element.offsetTop+10);
         if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
-            if(Math.floor(Math.random() * 2) == 1) {
-                clearInterval(element[1]);
-                element[0].className = "explosion";
+            if(Math.floor(Math.random() * 100) < 10 || element.bottom >= document.body.bottom) {
+                element.className = "explosion";
                 console.log("Explosion")
-                setTimeout(() => {element[0].remove()}, 3000);
+                setTimeout(() => {element.remove()}, 3000);
                 bombs.splice(bombs.indexOf(element),1);
                 console.log("Bomb Despawned");
             }
-        } 
+        }
     }
 }
 
@@ -60,7 +56,7 @@ function checkExplosion() {
     for (let element of document.getElementsByClassName("explosion")) {
         var elemRect = element.getBoundingClientRect();
         var playerRect = document.getElementById("player").getBoundingClientRect();
-        if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top <= playerRect.bottom) {
+        if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top-40 <= playerRect.bottom) {
             document.getElementById("player").className = "character dead";
             endGame();
         }
