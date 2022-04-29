@@ -34,17 +34,32 @@ class Alien {
     /*Makes a random bomb fall a set amount and explodes if colliding with the floor*/
     fall() {
         for (let bomb of this.bombs) {
-            bomb.style.top = (bomb.offsetTop + this.bombSpeed) + "px";
-            var closestElement = document.bombFromPoint(bomb.offsetLeft, bomb.offsetTop+10);
-            if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
-                if(Math.floor(Math.random() * 100) < 10 || bomb.bottom >= document.body.bottom || closestElement.classList.contains("character")) {
-                    bomb.className = "explosion";
-                    console.log("Explosion")
-                    setTimeout(() => {bomb.remove()}, 3000);
-                    bombs.splice(bombs.indexOf(bomb),1);
-                    console.log("Bomb Despawned");
+            if (element.classList.contains("explosion")) {
+                var elemRect = element.getBoundingClientRect();
+                var playerRect = document.getElementById("player").getBoundingClientRect();
+                if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top <= playerRect.bottom) {
+                    document.getElementById("player").style.display = "none";
                 }
             }
+            else {
+                bomb.style.top = (bomb.offsetTop + this.bombSpeed) + "px";
+                var closestElement = document.bombFromPoint(bomb.offsetLeft, bomb.offsetTop+10);
+                if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
+                    if(Math.floor(Math.random() * 100) < 10 || bomb.bottom >= document.body.bottom || closestElement.classList.contains("character")) {
+                        bomb.className = "explosion";
+                        console.log("Explosion")
+                        setTimeout(() => {bomb.remove()}, 3000);
+                        bombs.splice(bombs.indexOf(bomb),1);
+                        console.log("Bomb Despawned");
+                    }
+                }
+            }
+        }
+    }
+
+    removeBombs() {
+        for (let bomb of this.bombs) {
+            bomb.remove();
         }
     }
 }
