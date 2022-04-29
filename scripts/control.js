@@ -1,6 +1,7 @@
 /* player movement logic */
-currentKey = 0;
-lastKey = 0;
+var currentKey = 0;
+var lastKey = 0;
+var lives = 3;
 
 function setVars() {
     let player = document.getElementById("player");

@@ -57,8 +57,15 @@ function checkExplosion() {
         var elemRect = element.getBoundingClientRect();
         var playerRect = document.getElementById("player").getBoundingClientRect();
         if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top-40 <= playerRect.bottom) {
-            document.getElementById("player").className = "character dead";
-            endGame();
+            if (lives <= 1) {
+                document.getElementById("player").className = "character dead";
+                endGame();
+            }
+            else {
+                element.remove();
+                document.getElementsByTagName("li")[lives-1].style.display = "none";
+                lives -= 1;            
+            }
         }
     }
 }
