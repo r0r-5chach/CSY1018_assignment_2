@@ -20,6 +20,7 @@ function load() {
 /*Starts game functionality*/
 function startGame() {
     document.getElementById("player").className = "character";
+    lives = 3;
     showDisplay("block");
     document.getElementById("start").style.display = "none";
     document.getElementsByClassName("weapon")[0].style.display = "none";
