@@ -56,7 +56,7 @@ function checkExplosion() {
     for (let element of document.getElementsByClassName("explosion")) {
         var elemRect = element.getBoundingClientRect();
         var playerRect = document.getElementById("player").getBoundingClientRect();
-        if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left) {
+        if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top <= playerRect.bottom) {
             document.getElementById("player").style.display = "none";
         }
     }
