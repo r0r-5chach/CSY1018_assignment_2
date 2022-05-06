@@ -1,6 +1,7 @@
 /* player movement logic */
-currentKey = 0;
-lastKey = 0;
+var currentKey = 0;
+var lastKey = 0;
+var lives = 3;
 
 function setVars() {
     let player = document.getElementById("player");
@@ -94,23 +95,26 @@ function stop(event) {
     else if (event.keyCode == lastKey) {
         lastKey = 0;
     }
-    switch(event.keyCode) {   
-        case 38: /*Up*/
-        case 87: /*W*/
-            player.className = "character stand up";
-            break;
-        case 40: /*Down*/
-        case 83: /*S*/
-            player.className = "character stand down";
-            break;
-        case 37: /*Left*/
-        case 65: /*A*/
-            player.className = "character stand left";
-            break;
-        case 39: /*Right*/
-        case 68: /*D*/
-            player.className = "character stand right";
-            break;
 
+    if (!player.classList.contains("dead")) {
+        switch(event.keyCode) {   
+            case 38: /*Up*/
+            case 87: /*W*/
+                player.className = "character stand up";
+                break;
+            case 40: /*Down*/
+            case 83: /*S*/
+                player.className = "character stand down";
+                break;
+            case 37: /*Left*/
+            case 65: /*A*/
+                player.className = "character stand left";
+                break;
+            case 39: /*Right*/
+            case 68: /*D*/
+                player.className = "character stand right";
+                break;
+
+        }
     }
 }
