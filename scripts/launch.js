@@ -19,6 +19,9 @@ function load() {
 
 /*Starts game functionality*/
 function startGame() {
+    if (document.body.contains(document.getElementById("scoreBoard"))) {
+        document.getElementById("scoreBoard").remove();
+    }
     document.getElementById("player").className = "character";
     lives = 3;
     showDisplay("block");
@@ -55,6 +58,8 @@ function endGame() {
     showDisplay("none");
     button.style.display = "block";
     text.style.display = "block";
+    setScore();
+    scoreBoard();
 }
 
 function setScore() {
@@ -75,6 +80,7 @@ function getScores() {
 function scoreBoard() {
     var board = document.createElement("table");
     var scores = getScores();
+    scores.sort(twoDimensionalSort);
     for (let i in scores) {
         var row = document.createElement("tr");
         var col1 = document.createElement("td");
@@ -85,7 +91,21 @@ function scoreBoard() {
         row.appendChild(col2);
         board.appendChild(row);
     }
+    board.id = "scoreBoard";
+    board.style.marginTop = "250px";
+    board.style.marginLeft = "auto";
+    board.style.marginRight = "auto";
+    board.style.display = "table";
     document.body.appendChild(board);
+}
+
+function twoDimensionalSort(a, b) {
+    if (a[0] === b[0]) {
+        return 0;
+    }
+    else {
+        return (a[0] > b[0]) ? -1 : 1;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", load);
