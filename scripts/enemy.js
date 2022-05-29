@@ -13,7 +13,7 @@ function spawnEnemy() {
         alien.style.left = Math.floor(Math.random() * document.body.offsetWidth) + "px";
         if (document.elementFromPoint(alien.offsetLeft, alien.offsetTop).classList.contains("alien") == false) {   
             document.body.appendChild(alien);
-            alienLogic = setInterval(spawnBomb, Math.floor(Math.random() * 3000));
+            alienLogic = setInterval(spawnBomb, Math.floor(Math.random() * 3000-1000) + 1000);
             aliens.push([alien, alienLogic]);
             console.log("Alien Spawned")
             break;
@@ -30,6 +30,12 @@ function spawnBomb() {
     bomb.style.top = "70px";
     bomb.style.zIndex = "1";
     bomb.style.display = "absolute";
+    if (Math.floor(Math.random() * 4) < 2) {
+        bomb.style.transform = "rotate(45deg)";
+    }
+    else if (Math.floor(Math.random() * 4) > 2) {
+        bomb.style.transform = "rotate(135deg)";
+    }
     alien[0].appendChild(bomb);
     bombs.push(bomb);
     console.log("Bomb Spawned")
@@ -38,6 +44,14 @@ function spawnBomb() {
 /*Makes a random bomb fall a set amount and explodes if colliding with the floor*/
 function fall() {
     for (let element of bombs) {
+        if (element.style.transform === "rotate(45deg)") {
+            element.style.top = (element.offsetTop + 10) + "px";
+            element.style.left = (element.offsetLeft + 10) + "px";
+        }
+        else if (element.style.transform === "rotate(135deg)") {
+            element.style.top = (element.offsetTop + 10) + "px";
+            element.style.left = (element.offsetLeft - 10) + "px";
+        }     
         element.style.top = (element.offsetTop + 10) + "px";
         var elemRect = element.getBoundingClientRect();
         var bodyRect = document.body.getBoundingClientRect();
