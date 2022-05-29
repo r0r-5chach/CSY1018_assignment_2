@@ -57,4 +57,35 @@ function endGame() {
     text.style.display = "block";
 }
 
+function setScore() {
+    let name = prompt("Input your initials (e.g. JFK)", "AAA");
+    localStorage.setItem(name, score);
+}
+
+function getScores() {
+    var values = [];
+    var keys = Object.keys(localStorage);
+
+    for (let i of keys) {
+        values.push([localStorage.getItem(i), i]);
+    }
+    return values;
+}
+
+function scoreBoard() {
+    var board = document.createElement("table");
+    var scores = getScores();
+    for (let i in scores) {
+        var row = document.createElement("tr");
+        var col1 = document.createElement("td");
+        var col2 = document.createElement("td");
+        col1.innerHTML = scores[i][0];
+        col2.innerHTML = scores[i][1];
+        row.appendChild(col1);
+        row.appendChild(col2);
+        board.appendChild(row);
+    }
+    document.body.appendChild(board);
+}
+
 document.addEventListener("DOMContentLoaded", load);
