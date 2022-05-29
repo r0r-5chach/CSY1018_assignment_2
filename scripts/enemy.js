@@ -13,7 +13,7 @@ function spawnEnemy() {
         alien.style.left = Math.floor(Math.random() * document.body.offsetWidth) + "px";
         if (document.elementFromPoint(alien.offsetLeft, alien.offsetTop).classList.contains("alien") == false) {   
             document.body.appendChild(alien);
-            alienLogic = setInterval(spawnBomb, 3000);
+            alienLogic = setInterval(spawnBomb, Math.floor(Math.random() * 3000));
             aliens.push([alien, alienLogic]);
             console.log("Alien Spawned")
             break;
