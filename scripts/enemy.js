@@ -38,9 +38,11 @@ function spawnBomb() {
 function fall() {
     for (let element of bombs) {
         element.style.top = (element.offsetTop + 10) + "px";
-        var closestElement = document.elementFromPoint(element.offsetLeft, element.offsetTop+10);
-        if (!closestElement.classList.contains("sky") && !closestElement.classList.contains("alien") && !closestElement.classList.contains("bomb") && !closestElement.classList.contains("explosion")) {
-            if(Math.floor(Math.random() * 100) < 10 || element.bottom >= document.body.bottom || closestElement.classList.contains("character")) {
+        var elemRect = element.getBoundingClientRect();
+        var bodyRect = document.body.getBoundingClientRect();
+        var skyRect = document.getElementsByClassName("sky")[0].getBoundingClientRect();
+        if (elemRect.bottom >= skyRect.bottom || elemRect.bottom <= bodyRect.offsetHeight) {
+            if(Math.floor(Math.random() * 100) < 10) {
                 element.className = "explosion";
                 console.log("Explosion")
                 setTimeout(() => {element.remove()}, 3000);
