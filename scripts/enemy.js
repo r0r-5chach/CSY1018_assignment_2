@@ -1,6 +1,7 @@
 /* enemy spawning logic */
 var aliens = [];
 var bombs = [];
+var score = 0;
 
 /*Spawns Enemies*/
 function spawnEnemy() {
@@ -48,6 +49,8 @@ function fall() {
                 setTimeout(() => {element.remove()}, 3000);
                 bombs.splice(bombs.indexOf(element),1);
                 console.log("Bomb Despawned");
+                score += 1;
+
             }
         }
     }
@@ -59,6 +62,7 @@ function checkExplosion() {
         var elemRect = element.getBoundingClientRect();
         var playerRect = document.getElementById("player").getBoundingClientRect();
         if (elemRect.bottom >= playerRect.top && elemRect.right >= playerRect.left && elemRect.left <= playerRect.right && elemRect.top-40 <= playerRect.bottom) {
+            score -= 1;
             if (lives <= 1) {
                 document.getElementById("player").className = "character dead";
                 endGame();
